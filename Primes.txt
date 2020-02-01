@@ -1,0 +1,18 @@
+const fs = require('fs');
+let array = JSON.parse(fs.readFileSync("p.txt")) || [];
+let tick = array[array.length - 1] + 2 || 2;
+let LIMIT = 1000;
+while (tick < LIMIT) {
+	let check = true;
+	for (let i = 0; i < array.length; i++) {
+		if (Math.sqrt(tick) < array[i]) break;
+		if (tick % array[i] == 0) check = false;
+	}
+	if (check) {
+		array.push(tick);
+		console.log(tick);
+	}
+	if (tick % 2 == 1) tick += 2;
+  else tick++;
+}
+// fs.writeFileSync("p.txt", JSON.stringify(array));
